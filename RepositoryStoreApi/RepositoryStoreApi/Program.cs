@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RepositoryStoreApi.Data;
 using RepositoryStoreApi.Repositories;
+using RepositoryStoreApi.Repositories.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddTransient<ProductRepository>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
 builder.Services.AddOpenApi();
 
@@ -22,7 +23,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/v1/products", async (ProductRepository repository) => {
+app.MapGet("/v1/products", async (IProductRepository repository) => {
     var products = await repository.GetAllAsync(0, 10);
 });
 
