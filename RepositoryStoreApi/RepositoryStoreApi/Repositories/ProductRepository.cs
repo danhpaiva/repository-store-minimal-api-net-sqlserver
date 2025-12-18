@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RepositoryStoreApi.Data;
 using RepositoryStoreApi.Models;
+using RepositoryStoreApi.Repositories.Abstractions;
 
 namespace RepositoryStoreApi.Repositories;
 
-public class ProductRepository(AppDbContext context)
+public class ProductRepository(AppDbContext context) : IProductRepository
 {
     public async Task<Product> CreateAsync(Product product, CancellationToken cancellationToken = default)
     {
