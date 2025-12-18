@@ -28,6 +28,7 @@ app.UseHttpsRedirection();
 
 app.MapGet("/v1/products", async (IProductRepository repository, CancellationToken token) => {
     var products = await repository.GetAllAsync(0, 10, token);
+    return Results.Ok(products);
 });
 
 app.MapGet("/v1/products/{id}", async (int id, IProductRepository repository) => {
