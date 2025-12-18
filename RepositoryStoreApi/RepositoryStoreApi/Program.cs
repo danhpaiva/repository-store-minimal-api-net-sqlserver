@@ -19,4 +19,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapGet("/v1/products", async (AppDbContext context) => {
+    var products = await context.Products.ToListAsync();
+    return Results.Ok(products);
+});
+
+app.MapPost("/v1/products", async (AppDbContext context) => "Hello World");
+app.MapPut("/v1/products", async (AppDbContext context) => "Hello World");
+app.MapDelete("/v1/products", async (AppDbContext context) => "Hello World");
+
 app.Run();
