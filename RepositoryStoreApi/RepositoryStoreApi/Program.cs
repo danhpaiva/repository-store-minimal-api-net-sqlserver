@@ -22,9 +22,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/v1/products", async (AppDbContext context) => {
-    var products = await context.Products.ToListAsync();
-    return Results.Ok(products);
+app.MapGet("/v1/products", async (ProductRepository repository) => {
+    var products = await repository.GetAllAsync(0, 10);
 });
 
 app.MapPost("/v1/products", async (AppDbContext context) => "Hello World");
