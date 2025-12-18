@@ -3,6 +3,7 @@ using RepositoryStoreApi.Data;
 using RepositoryStoreApi.Models;
 using RepositoryStoreApi.Repositories;
 using RepositoryStoreApi.Repositories.Abstractions;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
